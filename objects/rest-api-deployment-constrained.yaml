@@ -27,10 +27,10 @@ spec:
         - name: json-data
           mountPath: /data
         # Resource Limits
-        #        resources:
-        #          requests:
-        #            memory: "32Mi"
-        #            cpu: "100m"
-        #          limits:
-        #            memory: "64Mi"
-        #            cpu: "150m"
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "100m"
+          limits:
+            memory: "64Mi"
+            cpu: "150m"

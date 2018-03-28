@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rest-api
+spec:
+  volumes:
+  - name: json-data
+    hostPath:
+      path: /data
+  containers:
+  - name: json-server
+    image: clue/json-server
+    volumeMounts:
+    - name: json-data
+      mountPath: /data

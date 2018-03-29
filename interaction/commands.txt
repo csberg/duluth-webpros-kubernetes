@@ -2,16 +2,32 @@ minikube start
 minikube mount ~/Projects/duluth-webpros-kubernetes/data:/data
 kubectl create -f pod/rest-api.yaml 
 kubectl get pods
-kubectl get logs rest-api
+kubectl logs rest-api
 kubectl delete pod rest-api 
 kubectl create -f objects/rest-api-deployment-constrained.yaml 
 kubectl expose deployment rest-api --port=80 --type NodePort  --name=rest-api-service
+minikube service rest-api-service
 kubectl autoscale deployment rest-api --cpu-percent=50 --min=1 --max=25
 minikube dashboard 
-kubectl show hpa
-minikube service rest-api-service
 kubectl get hpa
-kubectl delete hpa rest-api 
+minikube service rest-api-service
+# Get service port
+# Run load tester
 kubectl autoscale deployment rest-api --cpu-percent=10 --min=1 --max=25
+# look at minikube dashboard 
 kubectl get pods
 kubectl describe hpa rest-api
+kubectl describe deploy rest-api
+
+# DEMO 2
+kubectl describe deploy rest-api 
+kubectl edit deployment rest-api 
+kubectl get pods
+kubectl rollout status deployment/rest-api
+kubectl describe deployments
+kubectl get deploy
+kubectl rollout history deployment/rest-api
+kubectl get pods
+kubectl rollout undo deployment/rest-api
+kubectl get deploy rest-api
+kubectl describe deploy
